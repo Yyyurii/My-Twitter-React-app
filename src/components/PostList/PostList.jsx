@@ -2,7 +2,7 @@ import React from 'react';
 import './PostList.css';
 import PostListItem from '../PostListItem';
 
-const PostList = ({ posts }) => {
+const PostList = ({ posts, onDeleted }) => {
 
   const element = posts.map((item) => {
 
@@ -14,6 +14,7 @@ const PostList = ({ posts }) => {
             // label={item.label}
             // important={item.important}
             {...itemProps}
+            onDeleted={() => onDeleted(id)}
             />
         </li>
       )
