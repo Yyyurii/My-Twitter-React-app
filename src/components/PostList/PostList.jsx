@@ -6,17 +6,28 @@ const PostList = ({ posts }) => {
 
   const element = posts.map((item) => {
 
-    const {id, ...itemProps} = item;
-    return (
-      <li key={id} className="list-group-item">
-        <PostListItem 
-          // label={item.label}
-          // important={item.important}
-          {...itemProps} дорівнює двом верхнім строкам
-          />
-      </li>
-    )
+    if (typeof item === 'object' && isEmpty(item)) {
+      const {id, ...itemProps} = item;
+      return (
+        <li key={id} className="list-group-item">
+          <PostListItem 
+            // label={item.label}
+            // important={item.important}
+            {...itemProps}
+            />
+        </li>
+      )
+    }
   })
+
+  function isEmpty(obj) {
+    for(let key in obj)
+        {
+            return true;
+        }
+        return false;
+  }
+
   return (
     <ul className="app-list list-group">
       {element}
