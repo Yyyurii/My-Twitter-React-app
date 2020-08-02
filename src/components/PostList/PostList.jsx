@@ -3,7 +3,8 @@ import './PostList.css';
 import PostListItem from '../PostListItem';
 
 const PostList = ({ posts, onDeleted, onToggleImportant, onToggleLike }) => {
-
+  
+  // eslint-disable-next-line
   const element = posts.map((item) => {
 
     if (typeof item === 'object' && isEmpty(item)) {
