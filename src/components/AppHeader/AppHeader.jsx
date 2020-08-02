@@ -1,11 +1,11 @@
 import React from 'react';
 import './AppHeader.css';
 
-const AppHeadre = () => {
+const AppHeadre = ({liked, allPosts}) => {
   return (
     <div className="app-header d-flex">
       <h1>Yyyurii</h1>
-      <h2>5 entries, like 0</h2>
+      <h2>{allPosts} entries, like {liked}</h2>
     </div>
   )
 }
