@@ -14,7 +14,8 @@ export default class App extends Component {
       { label: "play hard", important: false, like: false, id: "asd" },
       { label: "That's all", important: false, like: false, id: "zxc" }
     ],
-    term: ''
+    term: '',
+    filter: 'all'
   }
 
   onToggleImportant = (id) => {
@@ -81,13 +82,25 @@ export default class App extends Component {
     this.setState({term});
   }
 
+  filterPost = (items, filter) => {
+    if(filter === 'like') {
+      return items.filter(item => item.like)
+    } else {
+      return items
+    }
+  }
+
+  onFilterSelect = (filter) => {
+    this.setState({filter})
+  }
+
   render() {
 
-    const { data, term } = this.state;
+    const { data, term, filter } = this.state;
     const liked = data.filter(item => item.like).length;
     const allPosts = data.length;
 
-    const visiblePosts = this.searchPosts(data, term);
+    const visiblePosts = this.filterPost(this.searchPosts(data, term), filter);
     return (
       <div className="app">
         <AppHeadre
@@ -95,7 +108,9 @@ export default class App extends Component {
           allPosts={allPosts} />
         <div className="search-panel d-flex">
           <SearchPanel onUpdateSearch={this.onUpdateSearch} />
-          <PostStatusFilter />
+          <PostStatusFilter 
+            filter={filter}
+            onFilterSelect={this.onFilterSelect} />
         </div>
         <PostList posts={visiblePosts}
           onDeleted={this.deleteItem}
